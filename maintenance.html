@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统维护中 - 柚姬AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #0f1419;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 动态网格背景 */
+        .grid-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 69, 96, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 69, 96, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        /* 光晕效果 */
+        .glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .glow-1 {
+            background: #e94560;
+            top: -200px;
+            left: -200px;
+            animation: float1 8s ease-in-out infinite;
+        }
+
+        .glow-2 {
+            background: #533483;
+            bottom: -200px;
+            right: -200px;
+            animation: float2 10s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(50px, 50px) scale(1.1);
+            }
+        }
+
+        @keyframes float2 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(-50px, -50px) scale(1.1);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 60px 30px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* Logo 区域 */
+        .header {
+            margin-bottom: 60px;
+        }
+
+        .logo-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b9d 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 8px 30px rgba(233, 69, 96, 0.4);
+        }
+
+        .brand-name {
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        /* 主要内容区 */
+        .main-content {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon-wrapper {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .icon-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.2) 0%, rgba(83, 52, 131, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: iconPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(233, 69, 96, 0);
+            }
+        }
+
+        .icon-circle::before {
+            content: '';
+            position: absolute;
+            width: 140%;
+            height: 140%;
+            border: 2px solid rgba(233, 69, 96, 0.3);
+            border-radius: 50%;
+            animation: ripple 3s ease-out infinite;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .icon {
+            font-size: 60px;
+            filter: grayscale(0);
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(233, 69, 96, 0.15);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #ff6b9d;
+            margin-bottom: 25px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+        }
+
+        /* 底部信息 */
+        .footer {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .time-display {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 15px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .main-content {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .icon-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+
+            .icon {
+                font-size: 50px;
+            }
+
+            .description {
+                font-size: 15px;
+            }
+
+            .info-item {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo-wrapper">
+                <div class="logo">AI</div>
+                <div class="brand-name">柚姬AI</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="icon-wrapper">
+                <div class="icon-circle">
+                    <div class="icon">🔧</div>
+                </div>
+            </div>
+
+            <h1>系统维护升级中</h1>
+
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>维护进行中</span>
+            </div>
+
+            <p class="description">
+                为了给您提供更优质的服务体验，我们正在进行系统升级维护。<br>
+                维护期间暂时无法访问，预计 30 分钟内恢复，请您耐心等待。
+            </p>
+
+            <div class="footer">
+                <p class="time-display" id="currentTime"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 显示当前时间
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            document.getElementById('currentTime').textContent = '当前时间：' + timeString;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // 监控 sentinel 聚合接口，检测主站是否恢复
+        // 优先使用 HTTPS 的哨兵域名；可按需增删
+        const SENTINEL_HEALTH_URLS = [
+            'https://sentinel.ugirl.ai/health',
+        ];
+        const RESTORE_TARGET_URL = 'https://www.ugirl.ai/';
+
+        async function checkRestore() {
+            // 使用 HEAD 请求直接检查 /health（现已允许 CORS）
+            try {
+                const url = SENTINEL_HEALTH_URLS[0] + '?_=' + Date.now();
+                const res = await fetch(url, {
+                    method: 'HEAD',
+                    mode: 'cors',
+                    cache: 'no-store',
+                    credentials: 'omit',
+                });
+                if (res.status === 204) {
+                    window.location.href = RESTORE_TARGET_URL;
+                }
+            } catch (e) {
+                // 忽略错误，等待下次检测
+            }
+        }
+
+        // 立即检测一次，并每 10 秒检测一次（更快恢复）
+        checkRestore();
+        setInterval(checkRestore, 10000);
+    </script>
+</body>
+</html>
