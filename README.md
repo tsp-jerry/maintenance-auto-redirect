@@ -154,7 +154,8 @@ sudo chmod +x /opt/maintenance/*.sh
 
 ‑ Q：pm2 不在 PATH？  
   A：为 Sentinel 设置环境变量 `PM2_BIN=/usr/local/bin/pm2`（按实际路径），或在 systemd/PM2 生态内保证可执行路径。
-
+  
+‑ Q：部署维护页，要在BT上设置404重定向首页。 
 ---
 
 ## 7. 目录建议（可选）
