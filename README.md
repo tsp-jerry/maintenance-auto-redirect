@@ -44,6 +44,7 @@
 
 - `maintenance.html`
   - 每 10s 对 `https://sentinel.ugirl.ai/health` 发 `HEAD`，返回 204 则跳 `https://www.ugirl.ai/`
+  - 维护页部署，要设置404重定向首页设置。
   - 如需自定义，将文末两处常量替换：
     ```js
     const SENTINEL_HEALTH_URLS = ['https://<sentinel-domain>/health'];
